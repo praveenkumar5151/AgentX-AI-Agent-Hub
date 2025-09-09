@@ -1,10 +1,9 @@
 {
-  "installCommand": "npm install --legacy-peer-deps",
-  "buildCommand": "npm run build",
+  "installCommand": "echo 'Skipping default install'",
+  "buildCommand": "chmod +x build.sh && ./build.sh",
   "build": {
     "env": {
-      "NODE_VERSION": "20",
-      "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
+      "NODE_VERSION": "20"
     }
   }
 }
