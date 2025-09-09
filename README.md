@@ -1,7 +1,3 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
 # AI Agent Hub
 
 A modern React application for managing and scheduling wellness events with calendar integration.
@@ -16,10 +12,10 @@ A modern React application for managing and scheduling wellness events with cale
 
 ## Event Types
 
-- 🧠 **Mindfulness**: Meditation and mental wellness activities
-- 📚 **Focus**: Deep work and concentration sessions
-- ☀️ **Exercise**: Physical activities and movement
-- ☕ **Break**: Rest periods and downtime
+-  **Mindfulness**: Meditation and mental wellness activities
+-  **Focus**: Deep work and concentration sessions
+-  **Exercise**: Physical activities and movement
+-  **Break**: Rest periods and downtime
 
 ## Tech Stack
 
@@ -72,20 +68,6 @@ Each event card displays:
 - Start and end times
 - Interactive "Add to Calendar" button
 
-## Project Structure
-
-```
-ai-agent-hub/
-├── components/
-│   ├── EventCard.tsx       # Main event card component
-│   └── Icons.tsx           # Custom icon components
-├── types/
-│   └── index.ts           # TypeScript type definitions
-└── README.md              # Project documentation
-```
-
-## Customization
-
 ### Adding New Event Types
 
 1. Update the `EventType` type in `types/index.ts`
@@ -130,3 +112,6 @@ This contains everything you need to run your app locally.
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+### Demo Link
+https://www.youtube.com/watch?v=tt8D7X73TKw&t=2s

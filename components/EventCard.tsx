@@ -48,49 +48,29 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         endDate.setDate(endDate.getDate() + 1);
       }
       
-      // Format dates for ICS file (YYYYMMDDTHHMMSSZ)
-      const formatDateForICS = (date: Date) => {
+      // Format dates for Google Calendar URL (YYYYMMDDTHHMMSSZ)
+      const formatDateForGoogle = (date: Date) => {
         return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
       };
       
-      const startFormatted = formatDateForICS(startDate);
-      const endFormatted = formatDateForICS(endDate);
-      const now = formatDateForICS(new Date());
+      const startFormatted = formatDateForGoogle(startDate);
+      const endFormatted = formatDateForGoogle(endDate);
       
-      // Create ICS file content
-      const icsContent = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//Your App//Calendar//EN',
-        'BEGIN:VEVENT',
-        `DTSTART:${startFormatted}`,
-        `DTEND:${endFormatted}`,
-        `DTSTAMP:${now}`,
-        `UID:${now}-${Math.random().toString(36).substr(2, 9)}@yourapp.com`,
-        `SUMMARY:${event.title}`,
-        `DESCRIPTION:${event.description || ''}`,
-        'STATUS:CONFIRMED',
-        'TRANSP:OPAQUE',
-        'END:VEVENT',
-        'END:VCALENDAR'
-      ].join('\r\n');
+      // Create Google Calendar URL
+      const googleCalendarUrl = new URL('https://calendar.google.com/calendar/render');
+      googleCalendarUrl.searchParams.set('action', 'TEMPLATE');
+      googleCalendarUrl.searchParams.set('text', event.title);
+      googleCalendarUrl.searchParams.set('dates', `${startFormatted}/${endFormatted}`);
+      googleCalendarUrl.searchParams.set('details', event.description || '');
       
-      // Create and download the ICS file
-      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${event.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.ics`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      // Open Google Calendar in a new tab
+      window.open(googleCalendarUrl.toString(), '_blank');
       
       setIsAdded(true);
-      console.log('Calendar event file downloaded successfully');
+      console.log('Google Calendar opened successfully');
     } catch (error) {
-      console.error('Error creating calendar event:', error);
-      alert('Error creating calendar event. Please try again.');
+      console.error('Error opening Google Calendar:', error);
+      alert('Error opening Google Calendar. Please try again.');
     }
   };
 
