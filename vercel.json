@@ -3,5 +3,12 @@
     "env": {
       "NODE_VERSION": "20"
     }
+  },
+  "installCommand": "npm ci --legacy-peer-deps",
+  "buildCommand": "npm run build",
+  "functions": {
+    "app/**": {
+      "runtime": "nodejs20.x"
+    }
   }
 }
